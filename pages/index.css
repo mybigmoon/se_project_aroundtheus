@@ -74,14 +74,16 @@
 
 .cards {
   /*fonts*/
+  margin-top: 30px;
 }
 
 .card__list {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 282px);
-  grid-gap: 17px 20px;
-  padding-left: 0;
+  grid-gap: 20px 17px;
+  padding: 0;
+  margin: 0;
 }
 
 .card {
@@ -111,4 +113,29 @@
   background: transparent url(../images/like.svg) center no-repeat;
   width: 21px;
   height: 18px;
+}
+
+@media screen and (max-width: 480px) {
+  .profile {
+    flex-direction: column;
+  }
+
+  .profile__info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .profile__description {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .profile__add-button {
+    margin: 0;
+    width: 100%;
+    max-width: 282px;
+  }
 }
