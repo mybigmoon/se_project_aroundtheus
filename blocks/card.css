@@ -4,8 +4,6 @@
   list-style: none;
   border-radius: 10px;
   overflow: hidden;
-  max-width: 282px;
-  max-height: 361px;
 }
 
 .card__image {
@@ -31,6 +29,9 @@
   white-space: nowrap;
   overflow: hidden;
   margin: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  line-height: 29.05px;
 }
 
 .card__like-button {

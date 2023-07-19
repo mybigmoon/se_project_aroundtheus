@@ -1,22 +1,15 @@
-# Project 3: Around The U.S.
+**Project Name**
+Around The U.S.
 
-### Overview
+**Project Description and its functionality**
+This project is a model of cards about Jacques Costeau exploring the U.S, letting the users click on each card, like it, and interact through images and a small text.
 
-- Intro
-- Figma
-- Images
-
-**Intro**
-
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.
+**A description of technologies and techniques used**
+We were able to work with different dimensions for bigger and smaller displays and screen sizes. At the same time it was very useful learning to apply all the values from Figma.
 
 **Figma**
 
 - [Link to the project on Figma](https://www.figma.com/file/ii4xxsJ0ghevUOcssTlHZv/Sprint-3%3A-Around-the-US?node-id=0%3A1)
-
-**Images**
-
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
 
 Good luck and have fun!
 
