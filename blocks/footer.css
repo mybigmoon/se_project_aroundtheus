@@ -50,4 +50,15 @@
     padding-top: 48px;
     padding-bottom: 36px;
   }
+  .footer__copyright {
+    color: #545454;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 282px;
+    height: 14px;
+    flex-shrink: 0;
+  }
 }
