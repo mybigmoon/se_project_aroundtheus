@@ -11,25 +11,17 @@
   margin: 0 auto;
 }
 
-@media screen and (max-width: 1100px) {
-  .page__section {
-    margin: 0px 20px;
-    max-width: 100%;
-    max-width: calc(100% - 40px);
-  }
-}
-
 .page__content {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 1100px) {
   .page__section {
-    width: 100%;
-    position: relative;
-    margin: 0 auto;
+    margin: 0px 20px;
+    max-width: 100%;
+    max-width: calc(100% - 40px);
     overflow: wrap;
   }
 }
