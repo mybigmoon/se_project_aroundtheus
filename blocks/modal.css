@@ -10,10 +10,11 @@
   visibility: hidden;
 }
 
-.modal_opened {
+.modal__opened {
   visibility: visible;
   pointer-events: all;
 }
+
 .modal__container {
   width: 430px;
   height: 330px;
