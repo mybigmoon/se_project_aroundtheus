@@ -23,7 +23,7 @@
   padding-right: 20px;
 }
 
-.card__text {
+.card__title {
   max-width: 220px;
   text-overflow: ellipsis;
   white-space: nowrap;
