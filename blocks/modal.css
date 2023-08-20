@@ -35,7 +35,7 @@
   font-weight: 900;
   line-height: 29px;
   color: #000;
-  margin: 0 0 54px;
+  margin: 34px 64px 0px 36px;
 }
 
 .modal__close {
@@ -97,7 +97,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin: 18.26px 0 0;
   border: none;
 }
 
@@ -116,7 +115,7 @@
     padding-bottom: 25px;
   }
 
-  .modal__heading {
+  .modal__title {
     font-size: 18px;
     line-height: 22px;
     margin-bottom: 75px;
