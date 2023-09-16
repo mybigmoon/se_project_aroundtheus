@@ -44,6 +44,7 @@ const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 const profileEditForm = profileEditModal.querySelector(".modal__form");
+const addNewCardFormElement = addNewCardModal.querySelector(".modal__form");
 const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
@@ -66,6 +67,14 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
+const cardTitleInput = addNewCardFormElement.querySelector(
+  ".modal__input_type_title"
+);
+
+const cardUrlInput = addNewCardFormElement.querySelector(
+  ".modal__input_type_url"
+);
+
 /* ----------------------------------------------------------------*/
 /*                       Event Handlers                            */
 /*-----------------------------------------------------------------*/
@@ -74,7 +83,20 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopup();
+  closePopup(profileEditModal);
+}
+
+function handleAddCardSubmit(e) {
+  e.preventDefault();
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  renderCard({ name, link }, cardsWrap);
+  closePopup(addNewCardModal);
+}
+
+function renderCard(cardData, wrapper) {
+  const cardElement = getCardElement(cardData);
+  wrapper.prepend(cardElement);
 }
 
 /* ----------------------------------------------------------------*/
@@ -91,16 +113,18 @@ profileCloseButton.addEventListener("click", () => {
   closePopup(profileEditModal);
 });
 
+//  Form Listeners //
+
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+
+addNewCardFormElement.addEventListener("submit", handleAddCardSubmit);
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
 });
 
-initialCards.forEach((cardData) => {
-  cardsWrap.prepend(getCardElement(cardData));
-});
+initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
 
 addNewCardButton.addEventListener("click", () => {
   addNewCardModal.classList.add("modal__opened");
