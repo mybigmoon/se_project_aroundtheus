@@ -108,7 +108,7 @@
   transition: linear 0.1s;
 }
 
-.modal__container_preview {
+.modal__container-preview {
   margin: auto;
   position: relative;
 }

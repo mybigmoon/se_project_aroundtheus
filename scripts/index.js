@@ -143,11 +143,6 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 addNewCardFormElement.addEventListener("submit", handleAddCardSubmit);
 
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
-});
-
 initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
 
 addNewCardButton.addEventListener("click", () => {
