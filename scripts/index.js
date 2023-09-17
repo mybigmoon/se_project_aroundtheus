@@ -68,9 +68,9 @@ function getCardElement(cardData) {
     likeButton.classList.toggle("card__like-button_active");
   });
 
-  /* cardRemoverButton.addEventListener("click", () => {
+  cardRemoverButton.addEventListener("click", () => {
     cardElement.remove();
-  });*/
+  });
 
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
@@ -143,8 +143,4 @@ addNewCardButton.addEventListener("click", () => {
 
 addCardCloseButton.addEventListener("click", () => {
   closePopup(addNewCardModal);
-});
-
-cardRemoverButton.addEventListener("click", () => {
-  cardElement.remove();
 });
