@@ -49,6 +49,13 @@ const cardListEl = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
+const previewImageModal = document.querySelector("#modal-preview");
+const previewImage = document.querySelector(".modal__preview-image");
+const previewImageTitle = document.querySelector(".modal__preview-title");
+const previewImageModalClose = document.querySelector(
+  "#preview-button-close-modal"
+);
+
 /* ----------------------------------------------------------------*/
 /*                       Functions                                 */
 /*-----------------------------------------------------------------*/
@@ -75,6 +82,12 @@ function getCardElement(cardData) {
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
   cardTitleEl.textContent = cardData.name;
+
+  cardImageEl.addEventListener("click", function () {
+    previewImage.src = cardData.link;
+    previewImageModal.classList.add("modal__opened");
+    previewImageTitle.textContent = cardData.name;
+  });
   return cardElement;
 }
 
@@ -143,4 +156,8 @@ addNewCardButton.addEventListener("click", () => {
 
 addCardCloseButton.addEventListener("click", () => {
   closePopup(addNewCardModal);
+});
+
+previewImageModalClose.addEventListener("click", () => {
+  closePopup(previewImageModal);
 });
