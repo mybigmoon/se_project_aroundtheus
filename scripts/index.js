@@ -61,6 +61,17 @@ function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const cardRemoverButton = cardElement.querySelector(".card__button-remove");
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
+  /* cardRemoverButton.addEventListener("click", () => {
+    cardElement.remove();
+  });*/
+
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
   cardTitleEl.textContent = cardData.name;
@@ -132,4 +143,8 @@ addNewCardButton.addEventListener("click", () => {
 
 addCardCloseButton.addEventListener("click", () => {
   closePopup(addNewCardModal);
+});
+
+cardRemoverButton.addEventListener("click", () => {
+  cardElement.remove();
 });
