@@ -60,8 +60,14 @@ const previewImageModalClose = document.querySelector(
 /*                       Functions                                 */
 /*-----------------------------------------------------------------*/
 
+function openPopup(popup) {
+  popup.classList.add("modal_opened");
+}
+
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
+  const form = modal.querySelector(".modal__form");
+  form.reset();
 }
 
 function getCardElement(cardData) {
@@ -85,6 +91,7 @@ function getCardElement(cardData) {
 
   cardImageEl.addEventListener("click", function () {
     previewImage.src = cardData.link;
+    previewImage.alt = data.name;
     previewImageModal.classList.add("modal_opened");
     previewImageTitle.textContent = cardData.name;
   });
