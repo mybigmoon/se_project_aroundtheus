@@ -66,8 +66,6 @@ function openPopup(popup) {
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-  const form = modal.querySelector(".modal__form");
-  form.reset();
 }
 
 function getCardElement(cardData) {
@@ -91,9 +89,9 @@ function getCardElement(cardData) {
 
   cardImageEl.addEventListener("click", function () {
     previewImage.src = cardData.link;
-    previewImage.alt = data.name;
-    previewImageModal.classList.add("modal_opened");
+    previewImage.alt = cardData.name;
     previewImageTitle.textContent = cardData.name;
+    previewImageModal.classList.add("modal_opened");
   });
   return cardElement;
 }
@@ -123,6 +121,7 @@ function handleAddCardSubmit(e) {
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardsWrap);
   closePopup(addNewCardModal);
+  addNewCardFormElement.reset();
 }
 
 function renderCard(cardData, wrapper) {
