@@ -67,8 +67,13 @@
             id="profile-title-input"
             class="modal__input"
             placeholder="Name"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="modal__error" id="profile-title-input-error"
+            >Please fill out this field</span
+          >
           <input
             class="modal__input"
             type="text"
@@ -77,7 +82,15 @@
             placeholder="Description"
             required
           />
-          <button class="modal__save-button" type="submit">Save</button>
+          <span class="modal__error" id="profile-description-input-error"
+            >Please fill out this field</span
+          >
+          <button
+            class="modal__save-button modal__button_disabled"
+            type="submit"
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
@@ -93,19 +106,27 @@
         <h2 class="modal__title">New Place</h2>
         <form class="modal__form" id="add-card-form">
           <input
+            id="modal-input-title"
             type="text"
             name="title"
             class="modal__input modal__input_type_title"
             placeholder="Title"
             required
           />
+          <span class="modal__span" id="modal-input-title-error"
+            >Please fill out this field</span
+          >
           <input
+            id="modal-input-description"
             class="modal__input modal__input_type_url"
             type="text"
             name="url"
             placeholder="Image URL"
             required
           />
+          <span class="modal__span" id="modal-input-description-error">
+            Please enter a web address</span
+          >
           <button class="modal__save-button" type="submit">Save</button>
         </form>
       </div>
@@ -137,5 +158,6 @@
     </template>
 
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>

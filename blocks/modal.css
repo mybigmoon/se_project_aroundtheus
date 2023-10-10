@@ -133,6 +133,25 @@
   position: absolute;
 }
 
+.modal__error {
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity;
+}
+
+.modal__error_opened {
+  visibility: visible;
+  opacity: inherit;
+  pointer-events: all;
+  transition: visibility 0s opacity 0.5s linear;
+  color: #f00;
+}
+
 @media screen and (max-width: 768px) {
   .modal__container {
     max-width: 282px;
