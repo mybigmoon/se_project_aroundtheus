@@ -2,7 +2,7 @@
 // pass all the settings on call
 
 function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
-  const errorMessageEl = formEl.querySelector(`#'${inputEl.id}-error`);
+  const errorMessageEl = formEl.querySelector(`# ${inputEl.id}-error`);
   inputEl.classList.add(inputErrorClass);
   errorMessageEl.textContent = inputEl.validationMessage;
   errorMessageEl.classList.add(errorClass);
@@ -32,7 +32,7 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
     submitButton.classList.add(inactiveButtonClass);
     submitButton.disabled = true;
   } else {
-    submitButton.classList.rempove(inactiveButtonClass);
+    submitButton.classList.remove(inactiveButtonClass);
     submitButton.disabled = false;
   }
 }
@@ -40,7 +40,7 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
 function setEventListeners(formEl, options) {
   const { inputSelector } = options;
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
-  const submitButton = formEl.querySelector(options.submitButtonSelector);
+  const submitButton = formEl.querySelector(`.${options.submitButtonSelector}`);
 
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
@@ -74,7 +74,7 @@ function enableValidation(options) {
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
+  submitButtonSelector: "modal__save-button",
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
