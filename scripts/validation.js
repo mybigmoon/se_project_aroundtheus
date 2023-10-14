@@ -1,8 +1,5 @@
-// enabling validation by calling enableValidation()
-// pass all the settings on call
-
 function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
-  const errorMessageEl = formEl.querySelector(`# ${inputEl.id}-error`);
+  const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   inputEl.classList.add(inputErrorClass);
   errorMessageEl.textContent = inputEl.validationMessage;
   errorMessageEl.classList.add(errorClass);
@@ -38,9 +35,9 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
 }
 
 function setEventListeners(formEl, options) {
-  const { inputSelector } = options;
+  const { inputSelector, submitButtonSelector } = options;
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
-  const submitButton = formEl.querySelector(`.${options.submitButtonSelector}`);
+  const submitButton = formEl.querySelector(submitButtonSelector);
 
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
@@ -58,16 +55,6 @@ function enableValidation(options) {
     });
 
     setEventListeners(formEl, options);
-    // Look for all inputs inside of form
-    // look through all the inputs to see if all are valid
-    // If input is not valid
-    //get the validation message
-    // add error class to input
-    // display error message
-    // disable button
-    // if all inputs are valid
-    // enable button
-    // reset error messages
   });
 }
 
