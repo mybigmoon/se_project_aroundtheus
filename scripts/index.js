@@ -1,4 +1,6 @@
-import Card from "../scripts/Card";
+import Card from "../components/Card.js";
+
+import FormValidator from "../components/FormValidator.js";
 
 const initialCards = [
   {
@@ -26,13 +28,6 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
-
-const Card = NewCard(cardData);
 
 /* ----------------------------------------------------------------*/
 /*                       Elements                                  */
@@ -68,6 +63,17 @@ const addCardSubmitButton = addNewCardModal.querySelector(
   ".modal__save-button"
 );
 
+/* -------------------------------------------------------------------------- */
+/*                                   Objects                                  */
+/* -------------------------------------------------------------------------- */
+
+const editProfileFormValidator = new FormValidator(profileEditForm, config);
+
+const addNewCardFormValidator = new FormValidator(
+  addNewCardFormElement,
+  config
+);
+
 /* ----------------------------------------------------------------*/
 /*                       Functions                                 */
 /*-----------------------------------------------------------------*/
@@ -89,42 +95,14 @@ function openPopup(modal) {
   document.addEventListener("keydown", closeByEscape);
 }
 
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const cardRemoveButton = cardElement.querySelector(".card__button-remove");
+// pass this segment to the Card class
 
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
-  cardRemoveButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.name;
-  cardTitleEl.textContent = cardData.name;
-
-  cardImageEl.addEventListener("click", function () {
-    previewImage.src = cardData.link;
-    previewImage.alt = cardData.name;
-    previewImageTitle.textContent = cardData.name;
-    openPopup(previewImageModal);
-  });
-
-  return cardElement;
+function handleImageClick(cardData) {
+  previewImage.src = cardData.link;
+  previewImage.alt = cardData.name;
+  previewImageTitle.textContent = cardData.name;
+  openPopup(previewImageModal);
 }
-
-const cardTitleInput = addNewCardFormElement.querySelector(
-  ".modal__input_type_title"
-);
-
-const cardUrlInput = addNewCardFormElement.querySelector(
-  ".modal__input_type_url"
-);
 
 /* ----------------------------------------------------------------*/
 /*                       Event Handlers                            */
@@ -146,11 +124,6 @@ function handleAddCardSubmit(e) {
   addNewCardFormElement.reset();
   const inputs = [...addNewCardModal.querySelectorAll(".modal__input")];
   toggleButtonState(inputs, addCardSubmitButton, config);
-}
-
-function renderCard(cardData, wrapper) {
-  const cardElement = getCardElement(cardData);
-  wrapper.prepend(cardElement);
 }
 
 /* ----------------------------------------------------------------*/
@@ -190,8 +163,6 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 addNewCardFormElement.addEventListener("submit", handleAddCardSubmit);
 
-initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
-
 addNewCardButton.addEventListener("click", () => {
   // Hide input error messages for the add card form
   const inputEls = [
@@ -203,3 +174,21 @@ addNewCardButton.addEventListener("click", () => {
 
   openPopup(addNewCardModal);
 });
+
+/* -------------------------------------------------------------------------- */
+/*                               Initialization                               */
+/* -------------------------------------------------------------------------- */
+
+//initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
+
+initialCards.forEach((cardData) => {
+  const card = new Card(cardData, "#card-template", handleImageClick);
+  //we need the card html element
+  const cardElement = card.getCardElement();
+  //append to the page
+  cardsWrap.prepend(cardElement);
+});
+
+editProfileFormValidator.enableValidation(config);
+
+addNewCardFormValidator.enableValidation(config);
