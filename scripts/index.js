@@ -62,10 +62,22 @@ const previewImageModalClose = document.querySelector(
 const addCardSubmitButton = addNewCardModal.querySelector(
   ".modal__save-button"
 );
+const cardTitleInput = document.querySelector("#modal-input-title");
+
+const cardUrlInput = document.querySelector("#modal-input-description");
 
 /* -------------------------------------------------------------------------- */
 /*                                   Objects                                  */
 /* -------------------------------------------------------------------------- */
+
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save-button",
+  inactiveButtonClass: "modal__save-button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
 
 const editProfileFormValidator = new FormValidator(profileEditForm, config);
 
@@ -104,6 +116,11 @@ function handleImageClick(cardData) {
   openPopup(previewImageModal);
 }
 
+function renderCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
+  return card.getCardElement();
+}
+
 /* ----------------------------------------------------------------*/
 /*                       Event Handlers                            */
 /*-----------------------------------------------------------------*/
@@ -119,11 +136,16 @@ function handleAddCardSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
-  renderCard({ name, link }, cardsWrap);
+  const cardData = { name: name, link: link };
+
+  const cardElement = renderCard(cardData);
+  //append to the page
+  cardsWrap.prepend(cardElement);
+
   closePopup(addNewCardModal);
   addNewCardFormElement.reset();
   const inputs = [...addNewCardModal.querySelectorAll(".modal__input")];
-  toggleButtonState(inputs, addCardSubmitButton, config);
+  addNewCardFormValidator._toggleButtonState();
 }
 
 /* ----------------------------------------------------------------*/
@@ -137,7 +159,7 @@ profileEditButton.addEventListener("click", () => {
   // Hide input error messages for the profile edit form
   const inputEls = [...profileEditForm.querySelectorAll(config.inputSelector)];
   inputEls.forEach((inputEl) => {
-    hideInputError(profileEditForm, inputEl, config);
+    editProfileFormValidator.hideInputError(inputEl);
   });
 
   openPopup(profileEditModal);
@@ -169,7 +191,7 @@ addNewCardButton.addEventListener("click", () => {
     ...addNewCardFormElement.querySelectorAll(config.inputSelector),
   ];
   inputEls.forEach((inputEl) => {
-    hideInputError(addNewCardFormElement, inputEl, config);
+    addNewCardFormValidator.hideInputError(inputEl);
   });
 
   openPopup(addNewCardModal);
@@ -182,9 +204,7 @@ addNewCardButton.addEventListener("click", () => {
 //initialCards.forEach((cardData) => renderCard(cardData, cardsWrap));
 
 initialCards.forEach((cardData) => {
-  const card = new Card(cardData, "#card-template", handleImageClick);
-  //we need the card html element
-  const cardElement = card.getCardElement();
+  const cardElement = renderCard(cardData);
   //append to the page
   cardsWrap.prepend(cardElement);
 });
