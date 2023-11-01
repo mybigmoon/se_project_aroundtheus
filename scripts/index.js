@@ -144,8 +144,7 @@ function handleAddCardSubmit(e) {
 
   closePopup(addNewCardModal);
   addNewCardFormElement.reset();
-  const inputs = [...addNewCardModal.querySelectorAll(".modal__input")];
-  addNewCardFormValidator._toggleButtonState();
+  addNewCardFormValidator.toggleButtonState();
 }
 
 /* ----------------------------------------------------------------*/
@@ -156,11 +155,7 @@ profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 
-  // Hide input error messages for the profile edit form
-  const inputEls = [...profileEditForm.querySelectorAll(config.inputSelector)];
-  inputEls.forEach((inputEl) => {
-    editProfileFormValidator.hideInputError(inputEl);
-  });
+  editProfileFormValidator.resetValidation();
 
   openPopup(profileEditModal);
 });
@@ -186,14 +181,6 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addNewCardFormElement.addEventListener("submit", handleAddCardSubmit);
 
 addNewCardButton.addEventListener("click", () => {
-  // Hide input error messages for the add card form
-  const inputEls = [
-    ...addNewCardFormElement.querySelectorAll(config.inputSelector),
-  ];
-  inputEls.forEach((inputEl) => {
-    addNewCardFormValidator.hideInputError(inputEl);
-  });
-
   openPopup(addNewCardModal);
 });
 
@@ -209,6 +196,6 @@ initialCards.forEach((cardData) => {
   cardsWrap.prepend(cardElement);
 });
 
-editProfileFormValidator.enableValidation(config);
+editProfileFormValidator.enableValidation();
 
-addNewCardFormValidator.enableValidation(config);
+addNewCardFormValidator.enableValidation();
