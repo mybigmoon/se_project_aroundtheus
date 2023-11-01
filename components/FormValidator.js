@@ -10,33 +10,33 @@ export default class FormValidator {
     ];
   }
 
-  showInputError(inputEl) {
+  _showInputError(inputEl) {
     const errorMessageEl = this._formEl.querySelector(`#${inputEl.id}-error`);
     inputEl.classList.add(this._options.inputErrorClass);
     errorMessageEl.textContent = inputEl.validationMessage;
     errorMessageEl.classList.add(this._options.errorClass);
   }
 
-  hideInputError(inputEl) {
+  _hideInputError(inputEl) {
     const errorMessageEl = this._formEl.querySelector(`#${inputEl.id}-error`);
     inputEl.classList.remove(this._options.inputErrorClass);
     errorMessageEl.textContent = "";
     errorMessageEl.classList.remove(this._options.errorClass);
   }
 
-  checkInputValidity(inputEl) {
+  _checkInputValidity(inputEl) {
     if (!inputEl.validity.valid) {
-      return this.showInputError(inputEl);
+      return this._showInputError(inputEl);
     }
-    this.hideInputError(inputEl);
+    this._hideInputError(inputEl);
   }
 
-  hasInvalidInput() {
+  _hasInvalidInput() {
     return !this._inputEls.every((inputEl) => inputEl.validity.valid);
   }
 
   toggleButtonState() {
-    if (this.hasInvalidInput()) {
+    if (this._hasInvalidInput()) {
       this._submitButton.classList.add(this._options.inactiveButtonClass);
       this._submitButton.disabled = true;
     } else {
@@ -45,10 +45,10 @@ export default class FormValidator {
     }
   }
 
-  setEventListeners() {
+  _setEventListeners() {
     this._inputEls.forEach((inputEl) => {
       inputEl.addEventListener("input", (e) => {
-        this.checkInputValidity(inputEl);
+        this._checkInputValidity(inputEl);
         this.toggleButtonState();
       });
     });
@@ -56,7 +56,7 @@ export default class FormValidator {
 
   resetValidation() {
     this._inputEls.forEach((inputEl) => {
-      this.hideInputError(inputEl);
+      this._hideInputError(inputEl);
     });
   }
 
@@ -65,6 +65,6 @@ export default class FormValidator {
       e.preventDefault();
     });
 
-    this.setEventListeners();
+    this._setEventListeners();
   }
 }
