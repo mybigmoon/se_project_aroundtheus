@@ -8,12 +8,35 @@ import {
   config,
   profileEditButton,
   addNewCardButton,
+  addNewCardFormElement,
   profileTitleInput,
+  profileEditForm,
+  cardsWrap,
   profileDescriptionInput,
 } from "../utils/constant.js";
 
-import Section from "./Section.js";
-import UserInfo from "./UserInfo.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
+
+/* ------------------------ Variables ------------------------ */
+
+export const editProfileFormValidator = new FormValidator(
+  profileEditForm,
+  config
+);
+export const addNewCardFormValidator = new FormValidator(
+  addNewCardFormElement,
+  config
+);
+
+export const newCardPopup = new PopupWithForm(
+  "#add-card-modal",
+  handleAddCardSubmit
+);
+newCardPopup.setEventListeners();
+
+export const imagePopup = new PopupWithImage("#modal-preview");
+imagePopup.setEventListeners();
 
 /* ------------------------ Funciones ------------------------ */
 

@@ -54,21 +54,3 @@ export const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
-
-export const editProfileFormValidator = new FormValidator(
-  profileEditForm,
-  config
-);
-export const addNewCardFormValidator = new FormValidator(
-  addNewCardFormElement,
-  config
-);
-
-export const newCardPopup = new PopupWithForm(
-  "#add-card-modal",
-  handleAddCardSubmit
-);
-newCardPopup.setEventListeners();
-
-export const imagePopup = new PopupWithImage("#modal-preview");
-imagePopup.setEventListeners();
