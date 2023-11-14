@@ -42,6 +42,7 @@ export const addNewCardModal = document.querySelector("#add-card-modal");
 export const addCardCloseButton = document.querySelector(
   "#add-card-close-button"
 );
+
 export const addNewCardFormElement =
   addNewCardModal.querySelector(".modal__form");
 export const cardListEl = document.querySelector(".cards__list");

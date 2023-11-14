@@ -7,11 +7,15 @@ import {
   initialCards,
   config,
   profileEditButton,
+  addNewCardModal,
   addNewCardButton,
   addNewCardFormElement,
   profileTitleInput,
+  profileTitle,
   profileEditForm,
+  profileEditModal,
   cardsWrap,
+  profileDescription,
   profileDescriptionInput,
 } from "../utils/constant.js";
 
@@ -20,33 +24,35 @@ import UserInfo from "../components/UserInfo.js";
 
 /* ------------------------ Variables ------------------------ */
 
-export const editProfileFormValidator = new FormValidator(
-  profileEditForm,
-  config
-);
-export const addNewCardFormValidator = new FormValidator(
+const editProfileFormValidator = new FormValidator(profileEditForm, config);
+const addNewCardFormValidator = new FormValidator(
   addNewCardFormElement,
   config
 );
 
-export const newCardPopup = new PopupWithForm(
-  "#add-card-modal",
-  handleAddCardSubmit
-);
+const newCardPopup = new PopupWithForm("#add-card-modal", handleAddCardSubmit);
 newCardPopup.setEventListeners();
 
-export const imagePopup = new PopupWithImage("#modal-preview");
+const imagePopup = new PopupWithImage("#modal-preview");
 imagePopup.setEventListeners();
 
+const editProfilePopup = new PopupWithForm(
+  "#profile-edit-modal",
+  handleEditProfileSubmit
+);
+editProfilePopup.setEventListeners();
+
+const profileUserInfo = new UserInfo(
+  ".profile__title",
+  ".profile__description"
+);
+
+const cardSection = new Section(
+  { items: initialCards, renderer: createCard },
+  ".cards__list"
+);
+
 /* ------------------------ Funciones ------------------------ */
-
-function openPopup(popup) {
-  popup.open();
-}
-
-function closePopup(popup) {
-  popup.close();
-}
 
 function handleImageClick(cardData) {
   imagePopup.open(cardData.link, cardData.name, cardData.name);
@@ -58,16 +64,23 @@ function createCard(cardData) {
 }
 
 function handleAddCardSubmit() {
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
+  const inputValues = newCardPopup._getInputValues();
+  const name = inputValues.title;
+  const link = inputValues.url;
+
   const cardData = { name: name, link: link };
 
-  const cardElement = createCard(cardData);
-  cardsWrap.prepend(cardElement);
-
-  closePopup(newCardPopup);
+  cardSection.addItem(cardData);
+  newCardPopup.close();
   addNewCardFormElement.reset();
   addNewCardFormValidator.toggleButtonState();
+}
+
+function handleEditProfileSubmit() {
+  profileUserInfo.setUserInfo(
+    profileTitleInput.value,
+    profileDescriptionInput.value
+  );
 }
 
 function renderCard(item) {
@@ -80,22 +93,20 @@ function renderCard(item) {
 /* ------------------------ Event Listeners ------------------------ */
 
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
+  const { name, job } = profileUserInfo.getUserInfo();
+  profileTitleInput.value = name;
+  profileDescriptionInput.value = job;
 
   editProfileFormValidator.resetValidation();
 
-  openPopup(profileEditModal);
+  editProfilePopup.open();
 });
 
-// ... Otros event listeners
-
-/* ------------------------ Inicialización ------------------------ */
-
-initialCards.forEach((cardData) => {
-  const cardElement = createCard(cardData);
-  cardsWrap.prepend(cardElement);
+addNewCardButton.addEventListener("click", () => {
+  newCardPopup.open();
 });
+
+cardSection.renderItems();
 
 editProfileFormValidator.enableValidation();
 addNewCardFormValidator.enableValidation();
