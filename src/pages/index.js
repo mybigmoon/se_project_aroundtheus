@@ -74,18 +74,9 @@ function handleAddCardSubmit(inputValues) {
   addNewCardFormValidator.toggleButtonState();
 }
 
-function handleEditProfileSubmit() {
-  profileUserInfo.setUserInfo(
-    profileTitleInput.value,
-    profileDescriptionInput.value
-  );
+function handleEditProfileSubmit(inputValues) {
+  profileUserInfo.setUserInfo(inputValues.title, inputValues.description);
 }
-
-// function renderCard(item) {
-//   const cardElement = document.createElement("div");
-//   cardElement.textContent = item.name;
-//   return cardElement;
-// }
 
 /* ------------------------ Event Listeners ------------------------ */
 
