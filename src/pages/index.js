@@ -81,12 +81,11 @@ function handleEditProfileSubmit() {
   );
 }
 
-function renderCard(item) {
-  const cardElement = document.createElement("div");
-  // Create and customize your card element based on the item data
-  cardElement.textContent = item.name;
-  return cardElement;
-}
+// function renderCard(item) {
+//   const cardElement = document.createElement("div");
+//   cardElement.textContent = item.name;
+//   return cardElement;
+// }
 
 /* ------------------------ Event Listeners ------------------------ */
 
