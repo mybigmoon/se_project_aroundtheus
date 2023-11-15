@@ -63,8 +63,7 @@ function createCard(cardData) {
   return card.getCardElement();
 }
 
-function handleAddCardSubmit() {
-  const inputValues = newCardPopup._getInputValues();
+function handleAddCardSubmit(inputValues) {
   const name = inputValues.title;
   const link = inputValues.url;
 
@@ -72,7 +71,6 @@ function handleAddCardSubmit() {
 
   cardSection.addItem(cardData);
   newCardPopup.close();
-  addNewCardFormElement.reset();
   addNewCardFormValidator.toggleButtonState();
 }
 
